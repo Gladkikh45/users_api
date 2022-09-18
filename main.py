@@ -34,5 +34,11 @@ def get_user(user_id):
     print(user_inf)
     return user_inf
 
+
+@app.route("/users",methods=["GET"])
+def get_users():
+    print(data)
+    return data
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8888)
