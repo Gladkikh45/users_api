@@ -6,7 +6,7 @@ def create_user():
     data = {
         "display_name": "kop"
     }
-    resp = requests.post(url, data)
+    resp = requests.post(url, json=data)
     created_user = resp.json()
     print(created_user)
 
