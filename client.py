@@ -38,6 +38,6 @@ def delete_user():
     print(users)
 
 create_user()
-get_user()
-# get_users()
+# get_user()
+get_users()
 # delete_user()

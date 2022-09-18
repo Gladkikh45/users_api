@@ -21,7 +21,9 @@ def create_user():
     }
     data.update(new_user)
     print(data)
-    return {"success": True}
+    return {
+        "id": user_id
+    }
 
 
 @app.route('/users/<user_id>',methods=["GET"])
