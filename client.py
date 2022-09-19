@@ -30,7 +30,7 @@ def get_users():
 
 
 def delete_user():
-    url = "http://127.0.0.1:8888/users/cd61c137-0ae0-42e8-a52d-5febe6c6be18"
+    url = "http://127.0.0.1:8888/users/903bc01c08171cc1538532c73a4a353cf1a71ebc"
 
     resp = requests.delete(url)
     users = resp.json()
@@ -39,5 +39,5 @@ def delete_user():
 
 create_user()
 # get_user()
-get_users()
-# delete_user()
+# get_users()
+delete_user()

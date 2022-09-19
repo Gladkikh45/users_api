@@ -44,5 +44,11 @@ def get_users():
     }
 
 
+@app.route("/users/<user_id>",methods=["DELETE"])
+def delete_user(user_id):
+    data.pop(user_id)
+    return {"success": True}
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8888)
