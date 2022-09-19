@@ -12,7 +12,7 @@ def create_user():
 
 
 def get_user():
-    url = "http://127.0.0.1:8888/users/cd61c137-0ae0-42e8-a52d-5febe6c6be18"
+    url = "http://127.0.0.1:8888/users/903bc01c08171cc1538532c73a4a353cf1a71ebc"
 
     resp = requests.get(url)
     user = resp.json()
@@ -37,7 +37,17 @@ def delete_user():
 
     print(users)
 
+
+def update_user():
+    url = "http://127.0.0.1:8888/users/903bc01c08171cc1538532c73a4a353cf1a71ebc"
+
+    resp = requests.patch(url)
+    users = resp.json()
+
+    print(users)
+
 create_user()
 # get_user()
-# get_users()
-delete_user()
+get_users()
+# delete_user()
+update_user()
