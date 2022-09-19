@@ -80,8 +80,7 @@ def update_user(user_id):
     user["password"] = request_update.get("password")
     user["display_name"] = request_update.get("display_name")
     user["email"] = request_update.get("email")
-    # return {"success": True}
-    return data
+    return {"success": True}
 
 
 if __name__ == '__main__':
