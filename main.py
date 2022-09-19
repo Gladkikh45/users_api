@@ -12,7 +12,6 @@ data = {
 @app.route('/users',methods=["POST"])
 def create_user():
     request_data = request.get_json()
-    # print(request_data)
     user_id = str(uuid4())
     new_user = {
         user_id: {
@@ -20,7 +19,6 @@ def create_user():
         }
     }
     data.update(new_user)
-    print(data)
     return {
         "id": user_id
     }
@@ -33,14 +31,18 @@ def get_user(user_id):
         "id": user_id,
         "display_name": user.get("display_name")
     }
-    print(user_inf)
     return user_inf
 
 
 @app.route("/users",methods=["GET"])
 def get_users():
-    print(data)
-    return data
+    users_list = []
+    for key, val in data.items():
+        users_list.append({"id": key, "display_name": val.get("display_name")})
+    return {
+        "users": users_list
+    }
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8888)
