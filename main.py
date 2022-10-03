@@ -2,9 +2,9 @@ from flask import Flask, request
 from uuid import uuid4
 import datetime
 from configuration.config import get_config
-from loguru import logger
 from flask import Response
 import json
+from logger.logger import get_logger
 
 
 app = Flask(__name__)
@@ -19,6 +19,8 @@ data = {
         }
 }
 
+conf = get_config()
+logger = get_logger(file_name=conf["log"]["file_name"])
 
 @app.route('/users',methods=["POST"])
 def create_user():
@@ -39,6 +41,7 @@ def create_user():
         "id": user_id
     }
     result = json.dumps(raw_resp)
+    logger.info("user_created")
     return Response(response=result, status=201, mimetype='application/json')
 
 
