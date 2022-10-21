@@ -1,0 +1,10 @@
+version: "3.3"
+
+services:
+  database:
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "5442:5432"
