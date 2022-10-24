@@ -135,22 +135,22 @@ def delete_user(user_id):
 
 @app.route("/users/<user_id>",methods=["PATCH"])
 def update_user(user_id):
-    user = data.get(user_id)
-    request_update = request.get_json()
 
-    if user == None:
-        error_inf = {
-            "details": "user does not exist"
-        }
-        result = json.dumps(error_inf)
+    cursor, conn = get_cursor()
+    request_data = request.get_json()
 
-        return Response(response=result, status=404, mimetype='application/json')
+    try:
+        cursor.execute(f"""
+        UPDATE main.users
+        SET display_name = '{request_data['display_name']}', login = '{request_data['login']}', hash = '{request_data['password']}'
+        WHERE id = '{user_id}';
+        """)
+        conn.commit()
+    except Exception as error:
+        print(error)
+        return Response(response=None, status=404, mimetype='application/json')
 
-    user["login"] = request_update.get("login")
-    user["password"] = request_update.get("password")
-    user["display_name"] = request_update.get("display_name")
-    user["email"] = request_update.get("email")
-    logger.info("user_updated")
+    
 
     return Response(response=None, status=204, mimetype='application/json')
 
@@ -160,17 +160,3 @@ if __name__ == '__main__':
     # hp_inf = get_config().get("web")
     # app.run(host=hp_inf.get("host"), port=hp_inf.get("port"))
     app.run(host="127.0.0.1", port=8888)
-    # cursor = get_cursor()
-
-    # try:
-    #     cursor.execute("""
-    #     select id, display_name from main.users;
-    #     """)
-    #     records = cursor.fetchall()
-    #     # conn.commit()
-    # except Exception as err:
-    #     print(err)
-
-
-    # for row in records:
-    #     print(row.get("id"), row.get("display_name"))

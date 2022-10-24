@@ -5,6 +5,12 @@ from loguru import logger
 logger.add("log.json", format="{time} {level} {message}",
 level="INFO", rotation="10 KB", compression="zip", serialize=True)
 
+new_inf = {
+    "display_name": "robert",
+    "login": "lost",
+    "password": "horizon"
+}
+
 
 def create_user():
     url = "http://127.0.0.1:8888/users"
@@ -40,20 +46,19 @@ def delete_user(user_id):
     print(resp.status_code)
 
 
-def update_user():
-    url = "http://127.0.0.1:8888/users/903bc01c08171cc1538532c73a4a353cf1a71ebc"
+def update_user(user_id):
+    url = f"http://127.0.0.1:8888/users/{user_id}"
     new_inf = {
         "display_name": "robert",
-        "email": "leather_rebel@gmail.com",
         "login": "lost",
         "password": "horizon"
-    }.pat
+    }
 
-    resp = requestsch(url, json=new_inf)
+    resp = requests.patch(url, json=new_inf)
 
 
-create_user()
+# create_user()
 # get_user(user_id="30d55e13-2cdb-424c-9710-f4d3baa69c71")
 # delete_user(user_id="63270cbf-ae2b-4fe7-8288-0eb881d690d2")
+update_user(user_id="e34359cb-b6cf-4002-b447-be60e36061b9")
 get_users()
-# update_user()
